@@ -1,0 +1,19 @@
+{
+  "name": "cor-datadictionary-migrate",
+  "version": "1.0.0",
+  "description": "hack week project to migrate data dictionary",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhutchinson/cor-datadictionary-migrate.git"
+  },
+  "author": "bhutchinson",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/bhutchinson/cor-datadictionary-migrate/issues"
+  },
+  "homepage": "https://github.com/bhutchinson/cor-datadictionary-migrate#readme"
+}
