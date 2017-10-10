@@ -23,12 +23,9 @@ var ddOptions = {
 request
     .get(finOptions)
     .on('response', function(response) {
-        console.log(response.statusCode) // 200
-        console.log(response.headers['content-type']) // 'image/png'
+        console.log(response.statusCode);
     })
-    .pipe(request
-    .put(ddOptions))
+    .pipe(request.put(ddOptions))
     .on('response', function(response) {
-        console.log(response.statusCode) // 200
-        console.log(response.headers['content-type']) // 'image/png'
+        console.log(response.statusCode);
     })
