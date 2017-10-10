@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 var request = require('request');
-var rp = require('request-promise');
 
 var finOptions = {
     uri: 'http://localhost:8080/kfs-dev/sys/api/v1/data-dictionary/entities',
@@ -23,9 +22,25 @@ var ddOptions = {
 request
     .get(finOptions)
     .on('response', function(response) {
-        console.log(response.statusCode);
+        const statusCode = response.statusCode;
+        if (statusCode === 200) {
+            console.log('Success! Entities have been retrieved!');           
+        } else {
+            console.log('There was a problem retrieving the entities: ' + response.statusCode + ': ' + response.statusMessage);
+        }
+    })
+    .on('error', function(error) {
+        console.log('OH NO, there was an ERROR retrieving the entities: ' + error);
     })
     .pipe(request.put(ddOptions))
     .on('response', function(response) {
-        console.log(response.statusCode);
+        const statusCode = response.statusCode;
+        if (statusCode === 200) {
+            console.log('Success! Entities have been migrated!');           
+        } else {
+            console.log('There was a problem migrating the entities: ' + response.statusCode + ': ' + response.statusMessage);
+        }
+    })
+    .on('error', function(error) {
+        console.log('OH NO, there was an ERROR migrating the entities: ' + error);
     })
