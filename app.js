@@ -1,26 +1,34 @@
 require('dotenv').config()
 
-const retrieveEntities = require('./retrieve');
+var request = require('request');
+var rp = require('request-promise');
 
-// (async () => {
-//     const parsedData = await retrieveEntities();
-//     console.log(parsedData);
-// })().catch(e => consle.error(e.message, e.stack)); 
+var finOptions = {
+    uri: 'http://localhost:8080/kfs-dev/sys/api/v1/data-dictionary/entities',
+    headers: {
+      'Authorization': 'Bearer ' + process.env.AUTH_TOKEN
+    },
+    json: true // Automatically stringifies the body to JSON
+};
 
-// const parsedData = retrieveEntities();
-// console.log(parsedData);
+var ddOptions = {
+    uri: 'http://localhost:8001/cor/datadictionary/api/v1/migrate/entities',
+    headers: {
+        'Authorization': 'Bearer ' + process.env.AUTH_TOKEN,
+        'Content-Type': 'application/json'
+    },
+    json: true // Automatically stringifies the body to JSON
+};
 
-async function main() {
-    try {
-        const parsedData = await retrieveEntities();
-        console.log(parsedData);
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-main();
-
-// retrieveEntities()
-//     .then(parsedData => console.log(parsedData))
-//     .catch(err => console.error(err));
+request
+    .get(finOptions)
+    .on('response', function(response) {
+        console.log(response.statusCode) // 200
+        console.log(response.headers['content-type']) // 'image/png'
+    })
+    .pipe(request
+    .put(ddOptions))
+    .on('response', function(response) {
+        console.log(response.statusCode) // 200
+        console.log(response.headers['content-type']) // 'image/png'
+    })

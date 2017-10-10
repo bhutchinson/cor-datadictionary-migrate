@@ -1,17 +1,16 @@
-require('dotenv').config()
 const http = require('http');
 
+const options = {
+    hostname: 'localhost',
+    port: 8080,
+    path: '/kfs-dev/sys/api/v1/data-dictionary/entities',
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + process.env.AUTH_TOKEN
+    }
+};
+
 async function retrieveEntities() {
-    const options = {
-        hostname: 'localhost',
-        port: 8080,
-        path: '/kfs-dev/sys/api/v1/data-dictionary/entities',
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + process.env.AUTH_TOKEN
-        }
-    };
-    
     await http.get(options, (res) => {
         const { statusCode } = res;
         const contentType = res.headers['content-type'];
