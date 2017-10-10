@@ -1,0 +1,40 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+config/local*
+
+# testing
+/coverage*
+
+# production
+/build
+
+# IDE files
+.idea
+*.iml
+.vscode
+
+# misc
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# AWS EBS Commands
+.aws-eb-cli.sh
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Building, Docker & Pipeline stuff
+.dockerignore
+Dockerfile
+dev.Dockerfile
+pipeline.yaml
+service.json
+wait.sh
